@@ -52,13 +52,18 @@ namespace TwincatLibraryUtilities
 
             List<string> properties = new List<string>();
             int valueLength = 0;
-            int index = 0;
-            
+            int index = -1;
+            int nextIndex = 0;
 
             while(filePosition < fileData.Length-1)
             {
-                index = fileData[filePosition++];
-                valueLength = fileData[filePosition++];
+                nextIndex = parseNumber(fileData, ref filePosition);
+                if (index +1 != nextIndex)
+                {
+                    break;
+                }
+                index = nextIndex;
+                valueLength = parseNumber(fileData, ref filePosition);
                 if (filePosition + valueLength < fileData.Length)
                 {
                     properties.Add(Encoding.UTF8.GetString(fileData, filePosition, valueLength));
@@ -67,6 +72,16 @@ namespace TwincatLibraryUtilities
             }
 
             return properties;
+        }
+
+        public int parseNumber(byte[] buffer, ref int filePosition)
+        {
+            int value = buffer[filePosition++];
+            if(value >= 128)
+            {
+                value += 128 * (buffer[filePosition++] - 1);
+            }
+            return value;
         }
     }
 }
