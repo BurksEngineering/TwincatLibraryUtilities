@@ -5,9 +5,15 @@ Tools for working with TwinCAT compiled libraries
 ## Library Property Reader
 
 Used to read a few pieces of metadata from a TwinCAT library:
-* Name
+* Name (Namespace)
 * Description
 * Author
+* Company
+* Version
+
+Or to read the dependencies of the library:
+* Name
+* Namespace
 * Company
 * Version
 

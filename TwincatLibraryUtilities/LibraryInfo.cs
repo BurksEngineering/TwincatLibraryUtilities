@@ -17,5 +17,7 @@
         //Version
         public string Version { get; set; }
 
+        public List<LibraryDependency> Dependencies { get; set; }
+
     }
 }
